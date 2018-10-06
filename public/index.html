@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simple Vue App</title>
+    <script src="https://unpkg.com/vue@2.5.17"></script>
+  </head>
+  <div id="app">
+    <p>
+      name: price x quantity
+    </p>
+    <p>
+      <ul>
+        <li v-for="item in items" v-bind:key="item.name">
+          {{ item.name }}: {{ item.price }} x 
+          <input type="number" 
+                 v-model="item.quantity"
+                 min='0'
+                 /> 
+        </li>
+      </ul>
+    </p>
+    <p> Total: {{ totalPrice | numberWithDelimiter }} yen (out tax) </p>
+    <p> Total(in Tax): {{ totalPriceWithTax | numberWithDelimiter}} yen </p>
+
+    <p v-show='!canBuy' v-bind:style="errorMessageStyle">
+      you can buy over {{ 1000 | numberWithDelimiter }}yen!! 
+    </p>
+    <button :disabled='!canBuy' v-on:click='doBuy($event)'> check out!! </button>
+  </div>
+  <script src="../src/app.js"></script>
+</html>
